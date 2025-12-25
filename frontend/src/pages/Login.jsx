@@ -32,7 +32,7 @@ const Login = () => {
       >
         {/* 🧊 INNER CARD */}
         <div className="relative w-[900px] h-[500px] flex rounded-[28px] overflow-hidden">
-          
+
           {/* LEFT – FORM */}
           <div className="w-1/2 p-12 text-white">
             <h2 className="text-2xl font-semibold mb-6">
@@ -42,9 +42,8 @@ const Login = () => {
             <label className="text-sm text-white/70">Email</label>
             <input
               className="w-full mt-1 mb-4 px-4 py-2 rounded-lg
-              bg-white/90 border border-white/70
-              text-gray-900 placeholder:text-gray-500
-              focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              bg-white/20 border border-white/60 text-white
+              placeholder:text-white/50 focus:ring-2 focus:ring-cyan-400"
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -52,10 +51,9 @@ const Login = () => {
             <label className="text-sm text-white/70">Password</label>
             <input
               type="password"
-              className="w-full mt-1 mb-3 px-4 py-2 rounded-lg
-              bg-white/90 border border-white/70
-              text-gray-900 placeholder:text-gray-500
-              focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className="w-full mt-1 mb-6 px-4 py-2 rounded-lg
+              bg-white/20 border border-white/60 text-white
+              placeholder:text-white/50 focus:ring-2 focus:ring-cyan-400"
               placeholder="Enter password"
               onChange={(e) => setPassword(e.target.value)}
             />
