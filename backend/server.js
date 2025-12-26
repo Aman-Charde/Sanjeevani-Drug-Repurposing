@@ -15,6 +15,12 @@ mongoose.connect(process.env.MONGO_URI)
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/rag", require("./routes/ragRoutes"));
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+// Health check endpoint for Render
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "healthy", timestamp: new Date().toISOString() });
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
