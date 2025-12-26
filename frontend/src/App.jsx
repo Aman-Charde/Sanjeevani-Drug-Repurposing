@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Results from "./pages/Results";
 import AuthFlip from "./pages/AuthFlip";
 import About from "./pages/About";
 import About1 from "./pages/About1";
@@ -22,6 +23,11 @@ const App = () => {
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/results" element={
+          <ProtectedRoute>
+            <Results />
           </ProtectedRoute>
         } />
         <Route path="/about" element={<About />} />

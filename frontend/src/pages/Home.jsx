@@ -143,7 +143,7 @@ export default function Home() {
         <p className="max-w-3xl mb-10 text-lg text-gray-400 md:text-xl leading-relaxed">
           Sanjeevani leverages <span className="text-cyan-400 font-medium">Retrieval-Augmented Generation</span> and cutting-edge AI to identify new therapeutic uses for existing drugs,
           accelerating research, reducing costs, and enabling responsible healthcare innovation.
-        </p>
+        </p> 
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">

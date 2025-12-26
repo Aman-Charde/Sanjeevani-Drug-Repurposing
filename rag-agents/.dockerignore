@@ -1,0 +1,43 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Environment files (secrets - add via HF Spaces settings)
+.env
+.env.local
+.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Tests and docs
+tests/
+*.md
+docs/
+
+# Reports (generated at runtime)
+reports/
+
+# Misc
+*.log
+.DS_Store
+Thumbs.db

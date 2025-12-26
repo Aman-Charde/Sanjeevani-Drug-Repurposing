@@ -82,20 +82,105 @@
 }
 
 .card-nav-cta-button {
-  background-color: #111;
+  position: relative;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 25%, #a855f7 50%, #ec4899 75%, #6366f1 100%);
+  background-size: 300% 300%;
   color: white;
   border: none;
-  border-radius: calc(0.75rem - 0.35rem);
-  padding: 0 1rem;
-  height: 100%;
-  font-weight: 500;
+  border-radius: 50px;
+  padding: 0 1.5rem;
+  height: calc(100% - 8px);
+  margin: 4px 0;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.3px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  box-shadow:
+    0 0 20px rgba(139, 92, 246, 0.4),
+    0 0 40px rgba(168, 85, 247, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  animation: gradientFlow 4s ease infinite, pulseGlow 2s ease-in-out infinite alternate;
+  overflow: hidden;
+}
+
+.card-nav-cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  transition: left 0.6s ease;
+}
+
+.card-nav-cta-button::after {
+  content: '→';
+  font-size: 16px;
+  transition: transform 0.3s ease;
+  margin-left: 2px;
 }
 
 .card-nav-cta-button:hover {
-  background-color: #333;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow:
+    0 0 30px rgba(139, 92, 246, 0.6),
+    0 0 60px rgba(168, 85, 247, 0.4),
+    0 0 80px rgba(236, 72, 153, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: gradientFlow 2s ease infinite;
+}
+
+.card-nav-cta-button:hover::before {
+  left: 100%;
+}
+
+.card-nav-cta-button:hover::after {
+  transform: translateX(4px);
+}
+
+.card-nav-cta-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow:
+      0 0 20px rgba(139, 92, 246, 0.4),
+      0 0 40px rgba(168, 85, 247, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  100% {
+    box-shadow:
+      0 0 25px rgba(139, 92, 246, 0.6),
+      0 0 50px rgba(168, 85, 247, 0.3),
+      0 0 70px rgba(236, 72, 153, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
 }
 
 .card-nav-content {
@@ -110,13 +195,13 @@
   gap: 12px;
   visibility: hidden;
   pointer-events: auto;
-  z-index: 1; 
+  z-index: 1;
 }
 
 .card-nav.open .card-nav-content {
   visibility: visible;
   pointer-events: auto;
-} 
+}
 
 .nav-card {
   height: 100%;

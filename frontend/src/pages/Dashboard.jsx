@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import SplitText from "../components/reactbits/SplitText/SplitText";
 import Orb from "../components/reactbits/Orb/Orb";
@@ -5,6 +7,27 @@ import Footer from "../components/Footer";
 
 export default function Dashboard() {
   const name = localStorage.getItem("name");
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+
+  const handleSearch = () => {
+    if (searchQuery.trim() === "") return;
+    setIsSearching(true);
+    // Navigate to results page with query
+    navigate("/results", { state: { query: searchQuery } });
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const handleChipClick = (chipQuery) => {
+    setSearchQuery(chipQuery);
+    navigate("/results", { state: { query: chipQuery } });
+  };
 
   const logout = () => {
     localStorage.clear();
@@ -110,6 +133,9 @@ export default function Dashboard() {
                   {/* Input field */}
                   <input
                     type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyPress={handleKeyPress}
                     placeholder="Search for drug repurposing insights..."
                     className="
                       flex-1
@@ -125,7 +151,9 @@ export default function Dashboard() {
 
                   {/* Search button */}
                   <button
-                    className="
+                    onClick={handleSearch}
+                    disabled={isSearching || !searchQuery.trim()}
+                    className={`
                       group/btn
                       relative
                       px-5 py-2
@@ -137,17 +165,25 @@ export default function Dashboard() {
                       hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
                       hover:scale-105
                       active:scale-95
-                    "
+                      ${(!searchQuery.trim() || isSearching) ? 'opacity-50 cursor-not-allowed' : ''}
+                    `}
                     style={{ backgroundSize: '200% 100%' }}
                   >
                     {/* Shine effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
 
                     <span className="relative flex items-center gap-2">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                      Search
+                      {isSearching ? (
+                        <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                      ) : (
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      )}
+                      {isSearching ? 'Searching...' : 'Search'}
                     </span>
                   </button>
                 </div>
@@ -159,15 +195,21 @@ export default function Dashboard() {
               <p className="text-sm text-gray-400">
                 <span className="text-purple-400/80">Try: </span>{" "}
                 <span className="italic text-white/60 hover:text-white/90 cursor-pointer transition-colors duration-300">
-                   "Existing drugs for Alzheimer's disease"
+                  "Existing drugs for Alzheimer's disease"
                 </span>
               </p>
 
               {/* Quick suggestion chips */}
               <div className="flex flex-wrap justify-center gap-2 mt-4">
-                {['Cancer treatments', 'Rare diseases', 'COVID-19'].map((chip) => (
+                {[
+                  'Drug repurposing for cancer',
+                  'Metformin in oncology',
+                  'Alzheimer\'s disease treatments',
+                  'COVID-19 drug candidates'
+                ].map((chip) => (
                   <button
                     key={chip}
+                    onClick={() => handleChipClick(chip)}
                     className="px-3 py-1.5 text-xs rounded-full bg-white/5 border border-white/10 text-gray-400 hover:bg-white/10 hover:text-white hover:border-purple-500/50 transition-all duration-300"
                   >
                     {chip}
