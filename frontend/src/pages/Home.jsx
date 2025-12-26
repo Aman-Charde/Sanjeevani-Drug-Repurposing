@@ -7,8 +7,31 @@ import Carousel from "../components/reactbits/Carousel/Carousel";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import logo from "../assets/loogoo.png";
+import MetallicPaint, { parseLogoImage } from "../components/reactbits/MetallicPaint/MetallicPaint";
+import sideLogo from '../assets/side_logo.png';
 
 export default function Home() {
+  const [imageData, setImageData] = useState(null);
+
+  useEffect(() => {
+    async function loadDefaultImage() {
+      try {
+        const response = await fetch(sideLogo);
+        const blob = await response.blob();
+        const file = new File([blob], "sideLogo.png", { type: blob.type });
+
+        const parsedData = await parseLogoImage(file);
+        setImageData(parsedData?.imageData ?? null);
+
+      } catch (err) {
+        console.error("Error loading default image:", err);
+      }
+    }
+
+    loadDefaultImage();
+  }, []);
+
+
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -105,73 +128,79 @@ export default function Home() {
       <Navbar items={navItems} />
 
       {/* ================= HERO SECTION ================= */}
-      <section className={`relative z-20 flex flex-col items-center px-6 pt-32 pb-20 text-center transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <section className={`relative z-20 px-6 pt-45 pb-25 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className="mx-auto max-w-7xl flex flex-col-reverse lg:flex-row items-center justify-between gap-8">
 
+          {/* Left Side - Text Content */}
+          <div className="pl-16 flex-1 text-center lg:text-left">
+            {/* Main Heading */}
+            <h1 className="mb-7 text-xl font-bold leading-tight md:text-2xl lg:text-4xl flex flex-nowrap items-center gap-2 lg:gap-3 justify-center lg:justify-start whitespace-nowrap">
+              <span className="bg-gradient-to-r from-white via-gray-100 to-gray-200 bg-clip-text text-transparent">
+                Revolutionizing
+              </span>
+              <span className="inline-block">
+                <RotatingText
+                  texts={['Drug Repurposing', 'Healthcare AI', 'Medical Discovery', 'Biomedical Research']}
+                  mainClassName="inline-flex px-3 sm:px-4 md:px-5 bg-gradient-to-r from-cyan-400 to-blue-500 text-white overflow-hidden py-1 sm:py-2 md:py-3 rounded-xl shadow-[0_0_30px_rgba(34,211,238,0.4)] whitespace-nowrap"
+                  staggerFrom={"last"}
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "-120%" }}
+                  staggerDuration={0.025}
+                  splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1 whitespace-nowrap inline-block"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                  rotationInterval={2500}
+                />
+              </span>
+            </h1>
 
-        {/* Logo */}
-        <div className="mb-6 flex items-center justify-center">
-          <img
-            src={logo}
-            alt="Sanjeevani Logo"
-            className="h-24 w-auto drop-shadow-[0_0_35px_rgba(46,248,255,0.3)] transition-transform duration-500 hover:scale-105"
-          />
-        </div>
+            {/* Subtitle */}
+            <div className="w-199">
+            <p className="max-w-2xl mb-9 text-lg text-gray-400 md:text-lg leading-relaxed">
+              Sanjeevani leverages <span className="text-cyan-400 font-medium">Retrieval-Augmented Generation</span> and cutting-edge AI to identify new therapeutic uses for existing drugs,
+              accelerating research, reducing costs, and enabling responsible healthcare innovation.
+            </p>
+            </div>
 
-        {/* Main Heading */}
-        <h1 className="mb-6 text-xl font-bold leading-tight md:text-2xl lg:text-5xl">
-          <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-            Revolutionizing
-          </span>
-          <br />
-          <span className="mt-2 inline-block">
-            <RotatingText
-              texts={['Drug Repurposing', 'Healthcare AI', 'Medical Discovery', 'Biomedical Research']}
-              mainClassName="px-3 sm:px-4 md:px-5 bg-gradient-to-r from-cyan-400 to-blue-500 text-white overflow-hidden py-1 sm:py-2 md:py-3 justify-center rounded-xl shadow-[0_0_30px_rgba(34,211,238,0.4)]"
-              staggerFrom={"last"}
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "-120%" }}
-              staggerDuration={0.025}
-              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
-              rotationInterval={2500}
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <Link
+                to="/login"
+                className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-2.5 text-base font-semibold text-white transition-all duration-300 hover:shadow-[0_0_40px_rgba(34,211,238,0.5)] hover:scale-105"
+              >
+                <span>Get Started</span>
+                <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+                <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              </Link>
+
+              <Link
+                to="/about1"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-600 bg-white/5 px-6 py-2.5 text-base font-semibold text-gray-300 backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/50 hover:text-white hover:bg-white/10"
+              >
+                <span>Learn More</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Side - Logo */}
+          <div className="flex-1 flex items-center justify-center lg:justify-end mr-20">
+            <img
+              src={sideLogo}
+              alt="Sanjeevani Logo"
+              className="w-64 h-64 md:w-72 md:h-72 lg:w-72 lg:h-72 object-contain drop-shadow-[0_0_50px_rgba(46,248,255,0.4)] transition-transform duration-500 hover:scale-120"
             />
-          </span>
-        </h1>
+          </div>
 
-        {/* Subtitle */}
-        <p className="max-w-3xl mb-10 text-lg text-gray-400 md:text-xl leading-relaxed">
-          Sanjeevani leverages <span className="text-cyan-400 font-medium">Retrieval-Augmented Generation</span> and cutting-edge AI to identify new therapeutic uses for existing drugs,
-          accelerating research, reducing costs, and enabling responsible healthcare innovation.
-        </p> 
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link
-            to="/login"
-            className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 text-lg font-semibold text-white transition-all duration-300 hover:shadow-[0_0_40px_rgba(34,211,238,0.5)] hover:scale-105"
-          >
-            <span>Get Started</span>
-            <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-            <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-          </Link>
-
-          <Link
-            to="/about1"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-600 bg-white/5 px-8 py-4 text-lg font-semibold text-gray-300 backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/50 hover:text-white hover:bg-white/10"
-          >
-            <span>Learn More</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
         </div>
       </section>
 
       {/* ================= STATS SECTION ================= */}
-      <section className={`relative z-20 px-6 py-16 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <section className={`relative z-20 px-6 py-6 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
@@ -309,7 +338,7 @@ export default function Home() {
                   to="/Login"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-semibold text-gray-900 transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105"
                 >
-                  <span>Start Free Trial</span>
+                  <span>Ask now your Query</span>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
