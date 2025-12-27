@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../assets/loogoo.png";
 
 export default function Footer() {
@@ -29,20 +30,11 @@ export default function Footer() {
           <div className="flex gap-16 text-sm">
 
             <div>
-              <h4 className="mb-3 font-semibold text-white">Product</h4>
-              <ul className="space-y-2">
-                <li className="hover:text-cyan-400 cursor-pointer">Features</li>
-                <li className="hover:text-cyan-400 cursor-pointer">Technology</li>
-                <li className="hover:text-cyan-400 cursor-pointer">Use Cases</li>
-              </ul>
-            </div>
-
-            <div>
               <h4 className="mb-3 font-semibold text-white">Company</h4>
               <ul className="space-y-2">
-                <li className="hover:text-cyan-400 cursor-pointer">About</li>
-                <li className="hover:text-cyan-400 cursor-pointer">Research</li>
-                <li className="hover:text-cyan-400 cursor-pointer">Contact</li>
+                <li><Link to="/about1" className="hover:text-cyan-400 cursor-pointer transition-colors">About</Link></li>
+                <li><Link to="/technology" className="hover:text-cyan-400 cursor-pointer transition-colors">Research</Link></li>
+                <li><Link to="/about" className="hover:text-cyan-400 cursor-pointer transition-colors">Contact</Link></li>
               </ul>
             </div>
 
@@ -56,12 +48,12 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-4 text-xs md:flex-row">
           <p>
             © {new Date().getFullYear()}{" "}
-            <span className="text-white font-medium">Sanjeevani</span>.  
+            <span className="text-white font-medium">Sanjeevani</span>.
             All rights reserved.
           </p>
 
           <p className="text-gray-400">
-            Built with <span className="text-red-400">♥</span> using AI & Research
+            Built with <span className="text-red-500">♥</span>
           </p>
         </div>
 

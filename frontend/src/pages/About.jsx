@@ -1,60 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import ChromaGrid from '../components/reactbits/ChromaGrid/ChromaGrid'
+import AmanImg from '../assets/AmanTeamMember.png'
+import AnshImg from '../assets/AnshTeamMember.png'
 
 const About = () => {
   const items = [
     {
-      image: "https://i.pravatar.cc/300?img=1",
+      image: AmanImg,
       title: "Aman Charde",
       subtitle: "Frontend Developer",
       handle: "@amancharde",
-      borderColor: "#3B82F6",
-      gradient: "linear-gradient(145deg, #2307f4ff, #000)",
+      borderColor: "#09C8BE",
+      gradient: "linear-gradient(145deg, #27F5EB, #000)",
       url: "https://github.com/aman-charde"
     },
     {
-      image: "https://i.pravatar.cc/300?img=2",
+      image: AnshImg,
       title: "Ansh Sable",
       subtitle: "Backend Engineer",
       handle: "@anshsable",
-      borderColor: "#b910b0ff",
-      gradient: "linear-gradient(180deg, #ff00f2ff, #000)",
-      url: "https://linkedin.com/in/anshsable"
-    }, {
-      image: "https://i.pravatar.cc/300?img=1",
-      title: "Aman Charde",
-      subtitle: "Frontend Developer",
-      handle: "@amancharde",
-      borderColor: "#FF3308",
-      gradient: "linear-gradient(145deg, #f63b3bff, #000)",
-      url: "https://github.com/aman-charde"
-    },
-    {
-      image: "https://i.pravatar.cc/300?img=2",
-      title: "Ansh Sable",
-      subtitle: "Backend Engineer",
-      handle: "@anshsable",
-      borderColor: "#0fefd1ff",
-      gradient: "linear-gradient(180deg, #00ffb7ff, #000)",
-      url: "https://linkedin.com/in/anshsable"
-    },
-    {
-      image: "https://i.pravatar.cc/300?img=1",
-      title: "Aman Charde",
-      subtitle: "Frontend Developer",
-      handle: "@amancharde",
-      borderColor: "#d1fc11ff",
-      gradient: "linear-gradient(145deg, #bbf900ff, #000)",
-      url: "https://github.com/aman-charde"
-    },
-    {
-      image: "https://i.pravatar.cc/300?img=2",
-      title: "Ansh Sable",
-      subtitle: "Backend Engineer",
-      handle: "@anshsable",
-      borderColor: "#10b91bff",
-      gradient: "linear-gradient(180deg, #00d907ff, #000)",
+      borderColor: "#00befeff",
+      gradient: "linear-gradient(180deg, #004782ff, #000)",
       url: "https://linkedin.com/in/anshsable"
     }
   ];
@@ -104,9 +71,11 @@ const About = () => {
             </p>
           </div>
 
-          <div style={{ height: '900px', position: 'relative' }}>
+          <div style={{ height: '550px', position: 'relative' }}>
             <ChromaGrid
               items={items}
+              columns={2}
+              rows={1}
               radius={300}
               damping={0.45}
               fadeOut={0.6}
