@@ -9,7 +9,7 @@ const About = () => {
     {
       image: AmanImg,
       title: "Aman Charde",
-      subtitle: "Frontend Developer",
+      subtitle: "Full Stack Developer",
       handle: "@amancharde",
       borderColor: "#09C8BE",
       gradient: "linear-gradient(145deg, #27F5EB, #000)",
@@ -18,7 +18,7 @@ const About = () => {
     {
       image: AnshImg,
       title: "Ansh Sable",
-      subtitle: "Backend Engineer",
+      subtitle: "AIML Engineer",
       handle: "@anshsable",
       borderColor: "#00befeff",
       gradient: "linear-gradient(180deg, #004782ff, #000)",

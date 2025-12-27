@@ -193,19 +193,15 @@ export default function Dashboard() {
             {/* Example text with better styling */}
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-400">
-                <span className="text-purple-400/80">Try: </span>{" "}
-                <span className="italic text-white/60 hover:text-white/90 cursor-pointer transition-colors duration-300">
-                  "Existing drugs for Alzheimer's disease"
-                </span>
+              
               </p>
 
               {/* Quick suggestion chips */}
               <div className="flex flex-wrap justify-center gap-2 mt-4">
                 {[
-                  'Drug repurposing for cancer',
-                  'Metformin in oncology',
-                  'Alzheimer\'s disease treatments',
-                  'COVID-19 drug candidates'
+                  'Metformin in Amlodipine',
+                  'Therapies in Neurology',
+                  'Drug Losartan'
                 ].map((chip) => (
                   <button
                     key={chip}
